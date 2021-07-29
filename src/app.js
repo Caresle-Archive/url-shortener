@@ -20,17 +20,22 @@ app.engine('hbs', exphbs({
 app.set('view engine', 'hbs')
 
 app.get('/', async (req, res) => {
-	const urls = await Url.find()
-	console.log(...urls)
+	const urls = await Url.find({}).lean()
+	console.log(urls)
 	res.render('index', {
-		url: [...urls]
+		url: urls
 	})
 })
 
-app.post('/shrink', (req, res) => {
-	const newUrl = Url({ fullUrl: req.body.fullUrl })
-	newUrl.save().then(() => console.log('saved'))
+app.post('/shrink', async (req, res) => {
+	await Url.create({ fullUrl: req.body.fullUrl })
 	res.redirect('/')
+})
+
+app.get('/:shrinkUrl', async (req, res) => {
+	const url = await Url.findOne({shrinkUrl: req.params.shrinkUrl})
+	
+	res.redirect(url.fullUrl)
 })
 
 app.listen(PORT, () => {
