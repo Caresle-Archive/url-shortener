@@ -19,22 +19,22 @@ app.engine('hbs', exphbs({
 }))
 app.set('view engine', 'hbs')
 
+app.get('/favicon.ico', (req, res) => res.status(204).end())
+
 app.get('/', async (req, res) => {
 	const urls = await Url.find({}).lean()
-	console.log(urls)
 	res.render('index', {
 		url: urls
 	})
 })
 
-app.post('/shrink', async (req, res) => {
+app.post('/shrinkUrl', async (req, res) => {
 	await Url.create({ fullUrl: req.body.fullUrl })
 	res.redirect('/')
 })
 
 app.get('/:shrinkUrl', async (req, res) => {
 	const url = await Url.findOne({shrinkUrl: req.params.shrinkUrl})
-	
 	res.redirect(url.fullUrl)
 })
 
