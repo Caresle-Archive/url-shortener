@@ -5,7 +5,12 @@ const path = require('path')
 const app = express()
 const PORT = process.env.PORT || 3001
 
+const Url = require('./models/Url')
+
+require('./db')
+
 app.set('views', path.join(__dirname, 'views'))
+app.use(express.urlencoded({ extended: false }))
 
 app.engine('hbs', exphbs({
 	defaultLayout: 'main',
@@ -14,23 +19,18 @@ app.engine('hbs', exphbs({
 }))
 app.set('view engine', 'hbs')
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
+	const urls = await Url.find()
+	console.log(...urls)
 	res.render('index', {
-		url: [
-			{
-				fullUrl: 'https://www.google.com',
-				shrinkUrl: '0000'
-			},
-			{
-				fullUrl: 'https://www.youtube.com',
-				shrinkUrl: 'tttt' 
-			}
-		]
+		url: [...urls]
 	})
 })
 
 app.post('/shrink', (req, res) => {
-	res.status(200).end()
+	const newUrl = Url({ fullUrl: req.body.fullUrl })
+	newUrl.save().then(() => console.log('saved'))
+	res.redirect('/')
 })
 
 app.listen(PORT, () => {
