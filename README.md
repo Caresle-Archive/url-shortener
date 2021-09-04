@@ -20,5 +20,5 @@ A simple url shortener using MongoDB, Nodejs, express and express handlebars.
 
 ### Useful resources
 
-- [How To Build A URL Shortener](https://www.youtube.com/watch?v=SLpUKAGnm-g&t=1344s) by web dev simplified - This help me for see the main concepts of the project, solve minor problems and have a better design of the page.
+- [How To Build A URL Shortener](https://www.youtube.com/watch?v=SLpUKAGnm-g) by web dev simplified - This help me for see the main concepts of the project, solve minor problems and have a better design of the page.
 - [Express js prevent GET /favicon.ico](https://stackoverflow.com/questions/35408729/express-js-prevent-get-favicon-ico) - I used this stack overflow post for solve the problem of get favicon.ico in req.params
