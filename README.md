@@ -14,7 +14,7 @@ A simple url shortener using MongoDB, Nodejs, express and express handlebars.
 
 1. First clone the repo.
 2. Next run: `npm i` 
-3. Create a .env file and add the next variables:
+3. Create a `.env` file and add the next variables:
 `PORT` and `MONGO_URI`
 4. Run `npm run start`
 
