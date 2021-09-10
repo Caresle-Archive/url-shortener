@@ -2,6 +2,8 @@
 
 A simple url shortener using MongoDB, Nodejs, express and express handlebars.
 
+**Check commonjs branch for require(file) instead of import**
+
 ## Screenshot
 ![](./readme-src/desktop.png)
 
